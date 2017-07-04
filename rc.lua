@@ -1,4 +1,4 @@
-local config_dir="/home/hyv/.config/awesome/"
+local config_dir="~/.config/awesome/"
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
