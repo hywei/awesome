@@ -98,7 +98,7 @@ theme.titlebar_maximized_button_focus_inactive  = themes_path.."default/titlebar
 theme.titlebar_maximized_button_normal_active = themes_path.."default/titlebar/maximized_normal_active.png"
 theme.titlebar_maximized_button_focus_active  = themes_path.."default/titlebar/maximized_focus_active.png"
 
-theme.wallpaper = themes_path.."/wallpaper/upgraded_cool_gun_girl_anime_hd-wallpaper-rbiS.jpg"
+theme.wallpaper = themes_path.."/wallpaper/minimalistic_arch_linux_wallpaper_by_malkowitch-dahpghs.jpg"
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = themes_path.."default/layouts/fairhw.png"
