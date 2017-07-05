@@ -1,8 +1,11 @@
-local config_dir="~/.config/awesome/"
+local config_path="/home/hyv/.config/awesome/"
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
 require("awful.autofocus")
+
+package.path = config_path .. "widgets/?-widget/?.lua;" .. package.path
+
 -- Widget and layout library
 local wibox = require("wibox")
 -- Theme handling library
@@ -13,6 +16,8 @@ local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 -- Enable VIM help for hotkeys widget when client with matching name is opened:
 require("awful.hotkeys_popup.keys.vim")
+
+require("volume")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -42,11 +47,11 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 --beautiful.init(awful.util.get_themes_dir() .. "default/theme.lua")
-beautiful.init(config_dir .."themes/default/theme.lua")
+beautiful.init(config_path .."themes/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "terminator"
-editor = os.getenv("EDITOR") or "nano"
+editor = os.getenv("EDITOR") or "emacs"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
@@ -103,7 +108,8 @@ myawesomemenu = {
 }
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "open terminal", terminal }
+			     { "open terminal", terminal },
+			     { "open chromium", terminal .. " -e chromium"}
                                   }
                         })
 
@@ -184,7 +190,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
+    awful.tag({ "Term", "Web", "Emacs", "Misc", "System", "Workspace1", "Workspace2" }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -218,6 +224,7 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
+	    volume_widget,
             wibox.widget.systray(),
             mytextclock,
             s.mylayoutbox,
